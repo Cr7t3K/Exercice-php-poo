@@ -2,18 +2,10 @@
 
 require_once __DIR__ . '/../src/Character.php';
 
-$godzilla = new Character();
-$godzilla->name = 'Godzilla';
-$godzilla->strength = 100;
-$godzilla->intelligence = 50;
+$godzilla = new Character("Godzilla", 100, 50);
 
 
-$kong = new Character();
-$kong->name = 'King Kong';
-$kong->strength = 70;
-$kong->intelligence = 80;
-
-var_dump($godzilla, $kong);
+$kong = new Character("King Kong", 70, 80);
 
 $godzilla->attack($kong);
 $godzilla->attack($kong);
@@ -24,4 +16,3 @@ $godzilla->attack($kong);
 $godzilla->attack($kong);
 
 $kong->heal();
-
