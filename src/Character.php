@@ -3,11 +3,11 @@
 class Character {
 
     // Déclaration des propriétés privées de la classe
-    private $name;
-    private $strength;
-    private $intelligence;
-    private $health = 100;
-    private $stamina = 100;
+    private string $name;
+    private int $strength;
+    private int $intelligence;
+    private int $health = 100;
+    private int $stamina = 100;
 
     // Constructeur pour initialiser les objets Character avec nom, force et intelligence
     public function __construct($name, $strength, $intelligence) {
@@ -17,12 +17,12 @@ class Character {
     }
 
     // Getter pour obtenir le nom
-    public function getName() {
+    public function getName(): string {
         return $this->name;
     }
 
     // Setter pour définir le nom, avec validation de la longueur
-    public function setName($name) {
+    public function setName(string $name): void {
         if (strlen($name) >= 3 && strlen($name) <= 20 ) {
             $this->name = $name;
         } else {
@@ -31,12 +31,12 @@ class Character {
     }
 
     // Getter pour obtenir la santé
-    public function getHealth() {
+    public function getHealth(): int {
         return $this->health;
     }
 
     // Setter pour définir la santé, avec validation de la valeur
-    public function setHealth($health) {
+    public function setHealth(int $health): void {
         if ($health >= 0 && $health <= 100) {
             $this->health = $health;
         } else {
@@ -45,12 +45,12 @@ class Character {
     }
 
     // Getter pour obtenir la force
-    public function getStrength() {
+    public function getStrength(): int {
         return $this->strength;
     }
 
     // Setter pour définir la force, avec validation de la valeur
-    public function setStrength($strength) {
+    public function setStrength(int $strength): void {
         if ($strength >= 0 && $strength <= 100) {
             $this->strength = $strength;
         } else {
@@ -59,12 +59,12 @@ class Character {
     }
 
     // Getter pour obtenir l'intelligence
-    public function getIntelligence() {
+    public function getIntelligence(): int {
         return $this->intelligence;
     }
 
     // Setter pour définir l'intelligence, avec validation de la valeur
-    public function setIntelligence($intelligence) {
+    public function setIntelligence(int $intelligence): void {
         if ($intelligence >= 0 && $intelligence <= 100) {
             $this->intelligence = $intelligence;
         } else {
@@ -73,12 +73,12 @@ class Character {
     }
 
     // Getter pour obtenir l'endurance
-    public function getStamina() {
+    public function getStamina(): int {
         return $this->stamina;
     }
 
     // Setter pour définir l'endurance, avec validation de la valeur
-    public function setStamina($stamina) {
+    public function setStamina(int $stamina): void {
         if ($stamina >= 0 && $stamina <= 100) {
             $this->stamina = $stamina;
         } else {
@@ -87,11 +87,8 @@ class Character {
     }
 
     // Méthode pour attaquer un autre personnage
-    public function attack($target) {
-        // Vérification si la cible est une instance de la classe Character
-        if (!$target instanceof Character) {
-            throw new Exception("Target must be a Character.");
-        }
+    public function attack(Character $target): void {
+
         // Vérifie si le personnage a assez d'endurance pour attaquer
         if ($this->getStamina() < 15) {
             echo "{$this->getName()} does not have enough stamina to attack.\n";
@@ -123,7 +120,7 @@ class Character {
     }
 
     // Méthode pour défendre contre une attaque
-    public function defend() {
+    public function defend(): int|float {
         $defenseEffectiveness = 0;
         if ($this->getStamina() > 20) {
             $defenseEffectiveness = $this->getStamina() - 20;
@@ -133,7 +130,7 @@ class Character {
     }
 
     // Méthode pour se soigner
-    public function heal() {
+    public function heal(): void {
         $baseHealAmount = 10; // Montant de base de la guérison
         $intelligenceBonus = ($baseHealAmount * $this->getIntelligence()) / 100; // Bonus de guérison basé sur l'intelligence
         $totalHeal = $baseHealAmount + $intelligenceBonus; // Calcul du total de points de vie récupérés (points de base + bonus)
