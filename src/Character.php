@@ -3,11 +3,11 @@
 class Character {
 
     // Déclaration des propriétés privées de la classe
-    private string $name;
-    private int $strength;
-    private int $intelligence;
-    private int $health = 100;
-    private int $stamina = 100;
+    protected string $name;
+    protected int $strength;
+    protected int $intelligence;
+    protected float $health = 100;
+    protected int $stamina = 100;
 
     // Constructeur pour initialiser les objets Character avec nom, force et intelligence
     public function __construct($name, $strength, $intelligence) {
@@ -17,12 +17,12 @@ class Character {
     }
 
     // Getter pour obtenir le nom
-    public function getName(): string {
+    protected function getName(): string {
         return $this->name;
     }
 
     // Setter pour définir le nom, avec validation de la longueur
-    public function setName(string $name): void {
+    protected function setName(string $name): void {
         if (strlen($name) >= 3 && strlen($name) <= 20 ) {
             $this->name = $name;
         } else {
@@ -31,12 +31,12 @@ class Character {
     }
 
     // Getter pour obtenir la santé
-    public function getHealth(): int {
+    protected function getHealth(): float {
         return $this->health;
     }
 
     // Setter pour définir la santé, avec validation de la valeur
-    public function setHealth(int $health): void {
+    protected function setHealth(float $health): void {
         if ($health >= 0 && $health <= 100) {
             $this->health = $health;
         } else {
@@ -45,12 +45,12 @@ class Character {
     }
 
     // Getter pour obtenir la force
-    public function getStrength(): int {
+    protected function getStrength(): int {
         return $this->strength;
     }
 
     // Setter pour définir la force, avec validation de la valeur
-    public function setStrength(int $strength): void {
+    protected function setStrength(int $strength): void {
         if ($strength >= 0 && $strength <= 100) {
             $this->strength = $strength;
         } else {
@@ -59,12 +59,12 @@ class Character {
     }
 
     // Getter pour obtenir l'intelligence
-    public function getIntelligence(): int {
+    protected function getIntelligence(): int {
         return $this->intelligence;
     }
 
     // Setter pour définir l'intelligence, avec validation de la valeur
-    public function setIntelligence(int $intelligence): void {
+    protected function setIntelligence(int $intelligence): void {
         if ($intelligence >= 0 && $intelligence <= 100) {
             $this->intelligence = $intelligence;
         } else {
@@ -73,12 +73,12 @@ class Character {
     }
 
     // Getter pour obtenir l'endurance
-    public function getStamina(): int {
+    protected function getStamina(): int {
         return $this->stamina;
     }
 
     // Setter pour définir l'endurance, avec validation de la valeur
-    public function setStamina(int $stamina): void {
+    protected function setStamina(int $stamina): void {
         if ($stamina >= 0 && $stamina <= 100) {
             $this->stamina = $stamina;
         } else {
@@ -110,7 +110,7 @@ class Character {
         if ($health < 0) {
             $target->setHealth(0);
         } else {
-            $target->setHealth($health);
+            $target->setHealth(min(100, $health));
         }
 
         // Réduction de l'intelligence de la cible suite à l'attaque
@@ -120,7 +120,7 @@ class Character {
     }
 
     // Méthode pour défendre contre une attaque
-    public function defend(): int|float {
+    protected function defend(): int {
         $defenseEffectiveness = 0;
         if ($this->getStamina() > 20) {
             $defenseEffectiveness = $this->getStamina() - 20;

@@ -1,23 +1,25 @@
 <?php
 
-// Include le fichier Character.php pour pouvoir utiliser la classe
-require_once __DIR__ . '/../src/Character.php';
+require_once __DIR__ . '/../src/Assassin.php';
+require_once __DIR__ . '/../src/Warrior.php';
+require_once __DIR__ . '/../src/Mage.php';
 
-// Crée deux nouveaux personnages avec des caractéristiques différentes.
-$godzilla = new Character("Godzilla", 100, 50);
-$kong = new Character("King Kong", 70, 80);
+$jack = new Warrior("Jack", 80, 40, 30);
+$robin = new Assassin("Robin", 60, 30, 50);
+$tom = new Mage("Tom", 40, 80, 80);
 
-// Godzilla attaque King Kong
-$godzilla->attack($kong);
-$godzilla->attack($kong);
+$jack->attack($tom);
+$jack->attack($robin);
 
-// King Kong se soigne après avoir reçu deux attaques
-$kong->heal();
+$robin->attack($tom);
+$robin->attack($jack);
 
-// Godzilla attaque King Kong
-$godzilla->attack($kong);
-$godzilla->attack($kong);
-$godzilla->attack($kong);
+$jack->powerStrike($robin);
 
-// King Kong se soigne après avoir reçu trois attaques
-$kong->heal();
+
+$robin->sneakAttack($jack);
+
+$tom->castSpell($jack);
+$tom->heal();
+$tom->heal();
+$tom->heal();
